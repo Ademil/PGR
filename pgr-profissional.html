@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema Profissional de Gerenciamento de Riscos Ocupacionais - NR-01 e NR-18">
+    <meta name="author" content="Engenharia de Segurança do Trabalho">
+    <title>PGR - Programa de Gerenciamento de Riscos | Construção Civil</title>
+    <link rel="stylesheet" href="pgr-profissional.css">
+</head>
+<body>
+    
+    <!-- ============================================
+         CABEÇALHO DO SISTEMA
+         ============================================ -->
+    <header class="system-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>PROGRAMA DE GERENCIAMENTO DE RISCOS - PGR</h1>
+                    <p class="subtitle">Conforme NR-01 - Gerenciamento de Riscos Ocupacionais (Portaria SEPRT n.º 6.730/2020)</p>
+                    <p class="subtitle-secondary">Aplicado à Indústria da Construção Civil - NR-18</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="btnSalvarDados" title="Salvar dados localmente">
+                        💾 Salvar Dados
+                    </button>
+                    <button class="btn btn-outline" id="btnCarregarDados" title="Carregar dados salvos">
+                        📂 Carregar Dados
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         CONTAINER PRINCIPAL
+         ============================================ -->
+    <main class="container">
+        
+        <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
+        <section class="card" id="secao-identificacao">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">1.</span>
+                    IDENTIFICAÇÃO DA EMPRESA E DO ESTABELECIMENTO
+                </h2>
+                <span class="section-badge">Obrigatório</span>
+            </div>
+            
+            <div class="form-container">
+                <div class="form-row">
+                    <div class="form-group col-8">
+                        <label for="razaoSocial" class="required">Razão Social da Empresa:</label>
+                        <input type="text" 
+                               id="razaoSocial" 
+                               class="form-control"
+                               placeholder="Digite a razão social completa da empresa contratante"
+                               required>
+                        <span class="field-help">Nome empresarial registrado na Junta Comercial</span>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <label for="cnpj" class="required">CNPJ:</label>
+                        <input type="text" 
+                               id="cnpj" 
+                               class="form-control"
+                               placeholder="00.000.000/0000-00" 
+                               maxlength="18"
+                               required>
+                        <span class="field-help">Cadastro Nacional da Pessoa Jurídica</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="nomeObra" class="required">Identificação da Obra/Empreendimento:</label>
+                        <input type="text" 
+                               id="nomeObra" 
+                               class="form-control"
+                               placeholder="Nome completo e descrição da obra ou empreendimento"
+                               required>
+                        <span class="field-help">Denominação oficial do projeto de construção civil</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="enderecoObra" class="required">Endereço Completo da Obra:</label>
+                        <input type="text" 
+                               id="enderecoObra" 
+                               class="form-control"
+                               placeholder="Logradouro, número, complemento, bairro, município, UF, CEP"
+                               required>
+                        <span class="field-help">Localização precisa do estabelecimento onde os serviços são executados</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="cnae">CNAE Principal:</label>
+                        <input type="text" 
+                               id="cnae" 
+                               class="form-control"
+                               placeholder="0000-0/00">
+                        <span class="field-help">Classificação Nacional de Atividades Econômicas</span>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <label for="grauRisco">Grau de Risco:</label>
+                        <select id="grauRisco" class="form-control">
+                            <option value="">Selecione</option>
+                            <option value="1">Grau 1 - Risco Mínimo</option>
+                            <option value="2">Grau 2 - Risco Baixo</option>
+                            <option value="3" selected>Grau 3 - Risco Médio</option>
+                            <option value="4">Grau 4 - Risco Alto</option>
+                        </select>
+                        <span class="field-help">Conforme Anexo II da NR-04</span>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <label for="numTrabalhadores">Nº Total de Trabalhadores:</label>
+                        <input type="number" 
+                               id="numTrabalhadores" 
+                               class="form-control"
+                               placeholder="0"
+                               min="1">
+                        <span class="field-help">Efetivo total na obra</span>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <h3 class="subsection-title">Responsável Técnico pela Elaboração do PGR</h3>
+                
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="nomeResponsavel" class="required">Nome Completo:</label>
+                        <input type="text" 
+                               id="nomeResponsavel" 
+                               class="form-control"
+                               placeholder="Nome completo do Engenheiro de Segurança do Trabalho"
+                               required>
+                    </div>
+                    
+                    <div class="form-group col-3">
+                        <label for="creaResponsavel" class="required">CREA/Registro:</label>
+                        <input type="text" 
+                               id="creaResponsavel" 
+                               class="form-control"
+                               placeholder="CREA 000000/UF"
+                               required>
+                    </div>
+                    
+                    <div class="form-group col-3">
+                        <label for="artResponsavel">Nº da ART:</label>
+                        <input type="text" 
+                               id="artResponsavel" 
+                               class="form-control"
+                               placeholder="ART 000000000">
+                        <span class="field-help">Anotação de Responsabilidade Técnica</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="dataElaboracao" class="required">Data de Elaboração:</label>
+                        <input type="date" 
+                               id="dataElaboracao" 
+                               class="form-control"
+                               required>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <label for="dataRevisao">Data da Última Revisão:</label>
+                        <input type="date" 
+                               id="dataRevisao" 
+                               class="form-control">
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <label for="versaoDocumento">Versão do Documento:</label>
+                        <input type="text" 
+                               id="versaoDocumento" 
+                               class="form-control"
+                               placeholder="Ex: 1.0, 2.0"
+                               value="1.0">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: FUNDAMENTAÇÃO LEGAL -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">2.</span>
+                    FUNDAMENTAÇÃO LEGAL E NORMATIVA
+                </h2>
+            </div>
+            
+            <div class="legal-framework">
+                <div class="legal-intro">
+                    <p><strong>BASE LEGAL E REGULAMENTAR:</strong></p>
+                    <p class="legal-description">
+                        O presente Programa de Gerenciamento de Riscos (PGR) foi elaborado em estrita conformidade 
+                        com as disposições das Normas Regulamentadoras do Ministério do Trabalho e Emprego, 
+                        constituindo instrumento técnico-legal de gestão da segurança e saúde ocupacional.
+                    </p>
+                </div>
+                
+                <div class="legal-list">
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-01</span>
+                            <strong>Disposições Gerais e Gerenciamento de Riscos Ocupacionais</strong>
+                        </div>
+                        <p>Portaria SEPRT n.º 6.730, de 09 de março de 2020. Estabelece as diretrizes gerais 
+                        para implementação de medidas de prevenção em segurança e saúde no trabalho (SST) e 
+                        institui o PGR como documento técnico obrigatório para identificação de perigos e 
+                        avaliação de riscos (item 1.5.3.3).</p>
+                    </div>
+                    
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-18</span>
+                            <strong>Condições de Segurança e Saúde no Trabalho na Indústria da Construção</strong>
+                        </div>
+                        <p>Estabelece requisitos técnicos específicos para a prevenção de acidentes e doenças 
+                        ocupacionais no setor da construção civil, incluindo obrigatoriedade de PCMAT para 
+                        obras com 20 ou mais trabalhadores, e medidas de proteção coletiva e individual.</p>
+                    </div>
+                    
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-06</span>
+                            <strong>Equipamentos de Proteção Individual - EPI</strong>
+                        </div>
+                        <p>Define critérios de seleção, fornecimento, uso e fiscalização de EPIs, sendo 
+                        aplicável quando medidas de proteção coletiva forem tecnicamente inviáveis ou não 
+                        oferecerem completa proteção.</p>
+                    </div>
+                    
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-10</span>
+                            <strong>Segurança em Instalações e Serviços em Eletricidade</strong>
+                        </div>
+                        <p>Aplicável às atividades de construção, montagem, operação e manutenção de 
+                        instalações elétricas, estabelecendo requisitos mínimos de segurança para trabalho 
+                        com eletricidade.</p>
+                    </div>
+                    
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-12</span>
+                            <strong>Segurança no Trabalho em Máquinas e Equipamentos</strong>
+                        </div>
+                        <p>Define referências técnicas para uso seguro de máquinas e equipamentos, incluindo 
+                        dispositivos de segurança, procedimentos operacionais e capacitação de operadores.</p>
+                    </div>
+                    
+                    <div class="legal-item">
+                        <div class="legal-item-header">
+                            <span class="legal-badge">NR-35</span>
+                            <strong>Trabalho em Altura</strong>
+                        </div>
+                        <p>Estabelece requisitos mínimos para trabalho em altura, definido como atividade 
+                        executada acima de 2,00m (dois metros) do nível inferior, com risco de queda.</p>
+                    </div>
+                </div>
+                
+                <div class="legal-note">
+                    <div class="note-icon">⚖️</div>
+                    <div class="note-content">
+                        <strong>DECLARAÇÃO DE CONFORMIDADE TÉCNICA:</strong>
+                        <p>Este documento constitui o Programa de Gerenciamento de Riscos (PGR) previsto no 
+                        item 1.5.3.3 da NR-01, elaborado por profissional legalmente habilitado, compreendendo 
+                        o inventário de riscos ocupacionais e o respectivo plano de ação. O PGR é parte 
+                        integrante do sistema de gestão de segurança e saúde no trabalho da organização, 
+                        com vigência permanente e atualização contínua conforme evolução das atividades e 
+                        identificação de novos perigos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: METODOLOGIA DE AVALIAÇÃO -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">3.</span>
+                    METODOLOGIA DE AVALIAÇÃO DE RISCOS
+                </h2>
+            </div>
+            
+            <div class="methodology-content">
+                <p class="methodology-intro">
+                    A avaliação de riscos ocupacionais foi realizada mediante metodologia qualitativa 
+                    baseada na matriz de risco, conforme estabelecido no item 1.5.4.4 da NR-01, considerando 
+                    a combinação entre a <strong>probabilidade de ocorrência</strong> do evento danoso e a 
+                    <strong>severidade das consequências</strong> à saúde e integridade física dos trabalhadores.
+                </p>
+                
+                <div class="methodology-matrices">
+                    <div class="matrix-container">
+                        <h4>Critérios de Probabilidade</h4>
+                        <table class="methodology-table">
+                            <thead>
+                                <tr>
+                                    <th>Nível</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-green">BAIXA</span></td>
+                                    <td>Evento raro, improvável de ocorrer durante a vida útil da instalação</td>
+                                    <td class="text-center">1</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-yellow">MÉDIA</span></td>
+                                    <td>Evento possível de ocorrer em algum momento da operação</td>
+                                    <td class="text-center">2</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-red">ALTA</span></td>
+                                    <td>Evento frequente, esperado ocorrer múltiplas vezes</td>
+                                    <td class="text-center">3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="matrix-container">
+                        <h4>Critérios de Severidade</h4>
+                        <table class="methodology-table">
+                            <thead>
+                                <tr>
+                                    <th>Nível</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-info">LEVE</span></td>
+                                    <td>Lesões superficiais, primeiros socorros, sem afastamento</td>
+                                    <td class="text-center">1</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">MODERADA</span></td>
+                                    <td>Lesões com afastamento temporário, tratamento médico</td>
+                                    <td class="text-center">2</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-danger">GRAVE</span></td>
+                                    <td>Lesões incapacitantes, sequelas permanentes</td>
+                                    <td class="text-center">3</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-critical">FATAL</span></td>
+                                    <td>Morte ou risco iminente de morte</td>
+                                    <td class="text-center">4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="risk-matrix">
+                    <h4>Matriz de Classificação de Risco (Probabilidade × Severidade)</h4>
+                    <table class="risk-matrix-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">PROBABILIDADE</th>
+                                <th colspan="4">SEVERIDADE</th>
+                            </tr>
+                            <tr>
+                                <th>Leve (1)</th>
+                                <th>Moderada (2)</th>
+                                <th>Grave (3)</th>
+                                <th>Fatal (4)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Alta (3)</strong></td>
+                                <td class="risk-medium">3<br>MÉDIO</td>
+                                <td class="risk-medium">6<br>MÉDIO</td>
+                                <td class="risk-high">9<br>ALTO</td>
+                                <td class="risk-high">12<br>ALTO</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Média (2)</strong></td>
+                                <td class="risk-low">2<br>BAIXO</td>
+                                <td class="risk-medium">4<br>MÉDIO</td>
+                                <td class="risk-medium">6<br>MÉDIO</td>
+                                <td class="risk-high">8<br>ALTO</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Baixa (1)</strong></td>
+                                <td class="risk-low">1<br>BAIXO</td>
+                                <td class="risk-low">2<br>BAIXO</td>
+                                <td class="risk-medium">3<br>MÉDIO</td>
+                                <td class="risk-medium">4<br>MÉDIO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="risk-classification">
+                    <h4>Interpretação e Ação por Nível de Risco</h4>
+                    <div class="classification-items">
+                        <div class="classification-item risk-low-bg">
+                            <strong>🟢 RISCO BAIXO (1-2)</strong>
+                            <p>Situação aceitável. Manutenção das medidas de controle existentes e 
+                            monitoramento periódico.</p>
+                        </div>
+                        <div class="classification-item risk-medium-bg">
+                            <strong>🟡 RISCO MÉDIO (3-6)</strong>
+                            <p>Situação que requer ação programada. Implementação de medidas adicionais 
+                            de controle em cronograma definido.</p>
+                        </div>
+                        <div class="classification-item risk-high-bg">
+                            <strong>🔴 RISCO ALTO (8-12)</strong>
+                            <p>Situação crítica que exige ação imediata. Implementação prioritária de 
+                            medidas de controle ou paralisação da atividade.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: INVENTÁRIO DE RISCOS -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">4.</span>
+                    INVENTÁRIO DE RISCOS OCUPACIONAIS
+                </h2>
+                <button class="btn btn-primary" id="btnAdicionarRisco">
+                    <span class="btn-icon">+</span> Adicionar Novo Risco
+                </button>
+            </div>
+            
+            <p class="section-description">
+                Identificação sistemática de perigos e avaliação qualitativa dos riscos ocupacionais 
+                presentes nas atividades e processos desenvolvidos no estabelecimento, conforme 
+                metodologia estabelecida no item 1.5.4.4 da NR-01.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="risk-inventory-table" id="tabelaInventarioRiscos">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 150px;">Atividade/<br>Função</th>
+                            <th style="min-width: 150px;">Perigo<br>Identificado</th>
+                            <th style="min-width: 120px;">Classificação<br>do Risco</th>
+                            <th style="min-width: 180px;">Fonte Geradora/<br>Situação de Exposição</th>
+                            <th style="min-width: 180px;">Possíveis Danos<br>à Saúde</th>
+                            <th style="min-width: 100px;">Probabilidade</th>
+                            <th style="min-width: 100px;">Severidade</th>
+                            <th style="min-width: 100px;">Nível de<br>Risco</th>
+                            <th style="min-width: 150px;">Evidência<br>Fotográfica</th>
+                            <th style="min-width: 80px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoInventarioRiscos">
+                        <!-- Linhas de riscos serão inseridas dinamicamente via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="inventory-stats" id="estatisticasRiscos">
+                <div class="stat-card">
+                    <span class="stat-label">Total de Riscos:</span>
+                    <span class="stat-value" id="totalRiscos">0</span>
+                </div>
+                <div class="stat-card risk-high-bg">
+                    <span class="stat-label">Riscos Altos:</span>
+                    <span class="stat-value" id="riscosAltos">0</span>
+                </div>
+                <div class="stat-card risk-medium-bg">
+                    <span class="stat-label">Riscos Médios:</span>
+                    <span class="stat-value" id="riscosMedios">0</span>
+                </div>
+                <div class="stat-card risk-low-bg">
+                    <span class="stat-label">Riscos Baixos:</span>
+                    <span class="stat-value" id="riscosBaixos">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: PLANO DE AÇÃO -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">5.</span>
+                    PLANO DE AÇÃO - MEDIDAS DE PREVENÇÃO E CONTROLE
+                </h2>
+                <button class="btn btn-success" id="btnGerarPlanoAcao">
+                    <span class="btn-icon">⚡</span> Gerar Plano de Ação
+                </button>
+            </div>
+            
+            <p class="section-description">
+                Estabelecimento de medidas de prevenção e controle de riscos ocupacionais, seguindo 
+                a hierarquia prevista na NR-01 (eliminação, minimização, controles de engenharia, 
+                controles administrativos e equipamentos de proteção individual), com definição de 
+                prioridades, cronograma e responsabilidades.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="action-plan-table" id="tabelaPlanoAcao">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 200px;">Risco Identificado</th>
+                            <th style="min-width: 300px;">Medidas de Controle Propostas</th>
+                            <th style="min-width: 120px;">Prioridade</th>
+                            <th style="min-width: 150px;">Responsável pela Implementação</th>
+                            <th style="min-width: 120px;">Prazo Previsto</th>
+                            <th style="min-width: 120px;">Status de Execução</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoPlanoAcao">
+                        <!-- Ações serão geradas automaticamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: CRONOGRAMA DE REVISÃO -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">6.</span>
+                    CRONOGRAMA DE REVISÃO E ATUALIZAÇÃO
+                </h2>
+            </div>
+            
+            <div class="revision-content">
+                <p><strong>PERIODICIDADE DE REVISÃO:</strong></p>
+                <p>Conforme item 1.5.5.3 da NR-01, o PGR deve ser revisto nas seguintes situações:</p>
+                <ul class="revision-list">
+                    <li>Quando houver mudanças significativas nas características dos riscos identificados;</li>
+                    <li>Quando houver mudanças nos processos de trabalho ou implantação de novas tecnologias;</li>
+                    <li>Quando identificadas inadequações, insuficiências ou ineficácias das medidas de prevenção;</li>
+                    <li>Na ocorrência de acidentes ou doenças relacionadas ao trabalho;</li>
+                    <li>Quando houver mudança nos requisitos legais aplicáveis;</li>
+                    <li>Periodicamente, a cada 02 (dois) anos, no mínimo.</li>
+                </ul>
+                
+                <div class="revision-table-container">
+                    <h4>Histórico de Revisões</h4>
+                    <table class="revision-table">
+                        <thead>
+                            <tr>
+                                <th>Versão</th>
+                                <th>Data</th>
+                                <th>Motivo da Revisão</th>
+                                <th>Responsável</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaHistoricoRevisoes">
+                            <tr>
+                                <td>1.0</td>
+                                <td id="dataVersaoInicial">-</td>
+                                <td>Elaboração inicial do documento</td>
+                                <td id="responsavelVersaoInicial">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 7: RESPONSABILIDADE TÉCNICA -->
+        <section class="card">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-number">7.</span>
+                    DECLARAÇÃO DE RESPONSABILIDADE TÉCNICA
+                </h2>
+            </div>
+            
+            <div class="responsibility-section">
+                <div class="declaration-text">
+                    <p class="declaration-intro">
+                        Declaro, para os devidos fins de direito e sob as penas da lei, que:
+                    </p>
+                    <ol class="declaration-list">
+                        <li>O presente Programa de Gerenciamento de Riscos (PGR) foi elaborado em estrita 
+                        conformidade com as disposições da Norma Regulamentadora NR-01 (Gerenciamento de 
+                        Riscos Ocupacionais) e demais normas aplicáveis;</li>
+                        
+                        <li>A identificação de perigos e avaliação de riscos foi realizada mediante 
+                        inspeção técnica no estabelecimento, análise documental e entrevistas com 
+                        trabalhadores e gestores;</li>
+                        
+                        <li>As medidas de prevenção propostas seguem a hierarquia estabelecida pela 
+                        legislação, priorizando a eliminação dos riscos e a proteção coletiva;</li>
+                        
+                        <li>Este documento constitui instrumento técnico-legal válido para fins de 
+                        fiscalização trabalhista, auditoria, defesa pericial e demais finalidades 
+                        previstas em lei;</li>
+                        
+                        <li>Assumo integral responsabilidade técnica pelo conteúdo deste documento, 
+                        nos termos da legislação profissional vigente.</li>
+                    </ol>
+                </div>
+                
+                <div class="signature-block">
+                    <div class="signature-info">
+                        <p class="signature-location" id="assinaturaLocal">Local e Data</p>
+                    </div>
+                    
+                    <div class="signature-line-container">
+                        <div class="signature-line"></div>
+                        <p class="signature-name" id="assinaturaNome">Nome do Responsável Técnico</p>
+                        <p class="signature-title" id="assinaturaTitulo">Engenheiro de Segurança do Trabalho</p>
+                        <p class="signature-credential" id="assinaturaCredencial">CREA nº 000000/UF</p>
+                        <p class="signature-art" id="assinaturaArt">ART nº 000000000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOTÕES DE AÇÃO FINAL -->
+        <div class="final-actions">
+            <button class="btn btn-large btn-primary" id="btnVisualizarPrevia">
+                <span class="btn-icon">👁️</span> Visualizar Prévia
+            </button>
+            <button class="btn btn-large btn-success" id="btnGerarPDF">
+                <span class="btn-icon">📄</span> Gerar PDF do PGR
+            </button>
+            <button class="btn btn-large btn-secondary" id="btnExportarDados">
+                <span class="btn-icon">💾</span> Exportar Dados (JSON)
+            </button>
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="system-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><strong>Sistema PGR | Programa de Gerenciamento de Riscos Ocupacionais</strong></p>
+                    <p class="footer-note">Desenvolvido em conformidade com NR-01 e NR-18</p>
+                    <p class="footer-note">Versão 2.0 - 2024 | Uso profissional em Segurança do Trabalho</p>
+                </div>
+                <div class="footer-legal">
+                    <p class="footer-disclaimer">
+                        Este sistema é uma ferramenta técnica de apoio à elaboração de documentos de SST. 
+                        O responsável técnico deve validar todas as informações e adequá-las à realidade 
+                        de cada estabelecimento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="pgr-profissional.js"></script>
+    
+</body>
+</html>
